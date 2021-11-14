@@ -1,0 +1,94 @@
+Academic license - for non-commercial use only
+Academic license - for non-commercial use only
+Variable Indexes:
+generation:[1, 420]
+theta:     [3925, 6660]
+power_flow:[6661, 10164]
+switched:  [421, 3924]
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (win64)
+Optimize a model with 22644 rows, 10164 columns and 55368 nonzeros
+Model fingerprint: 0x2e3ff3aa
+Variable types: 6660 continuous, 3504 integer (3504 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 2e+04]
+  Objective range  [1e+00, 1e+04]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [2e-04, 2e+04]
+Presolve removed 9120 rows and 2774 columns
+Presolve time: 0.09s
+Presolved: 13524 rows, 7390 columns, 45916 nonzeros
+Variable types: 4219 continuous, 3171 integer (3171 binary)
+
+Root relaxation: objective 1.166021e+06, 9458 iterations, 0.27 seconds
+Total elapsed time = 5.38s
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 1166021.29    0   97          - 1166021.29      -     -    9s
+     0     0 1166021.29    0  270          - 1166021.29      -     -   12s
+>>> rank 1, OBJ: 1.1731773542070948e6, CT: 0.2683982849121094
+     0     0 1166021.29    0  267          - 1166021.29      -     -   14s
+H    0     0                    1173177.3542 1166021.29  0.61%     -   15s
+     0     0 1166021.29    0  624 1173177.35 1166021.29  0.61%     -   21s
+>>> rank 1, OBJ: 1.173177352180887e6, CT: 0.28125572204589844
+     0     0 1166021.29    0  648 1173177.35 1166021.29  0.61%     -   22s
+H    0     0                    1173177.3522 1166021.29  0.61%     -   22s
+>>> rank 1, OBJ: 1.1731773521338713e6, CT: 0.7672367095947266
+     0     0 1166021.29    0  436 1173177.35 1166021.29  0.61%     -   25s
+     0     0 1166021.29    0  200 1173177.35 1166021.29  0.61%     -   27s
+>>> rank 1, OBJ: 1.1731184565791343e6, CT: 10.798053741455078
+H    0     2                    1173118.4566 1166021.29  0.60%     -   44s
+     0     2 1166021.29    0  147 1173118.46 1166021.29  0.60%     -   44s
+     7    16 1166021.29    3  428 1173118.46 1166021.29  0.60%  1064   45s
+equal
+    77   108 1166021.29    9  889 1173118.46 1166021.29  0.60%   806   52s
+   107   150 1166021.29   10  408 1173118.46 1166021.29  0.60%  1061   57s
+equal
+   149   366 1166021.29   11  475 1173118.46 1166021.29  0.60%  1244   65s
+equal
+>>> rank 1, OBJ: 1.1712324101452555e6, CT: 54.86010932922363
+H  365   973                    1171232.4101 1166021.29  0.44%   831   77s
+equal
+equal
+equal
+equal
+   974  1086 1166021.29   41  178 1171232.41 1166021.29  0.44%   571  157s
+H 1019  1086                    1170379.5882 1166021.29  0.37%   553  157s
+>>> rank 1, OBJ: 1.170379588154706e6, CT: 0.17258262634277344
+  1246  1511 1166021.29   62  403 1170379.59 1166021.29  0.37%   564  691s
+>>> rank 1, OBJ: 1.170379588154702e6, CT: 480.84578704833984
+
+>>> rank 1, OBJ: 1.1697628698427372e6, CT: 530.7865657806396
+H 1672  4634                    1169762.8698 1166021.29  0.32%   487  741s
+equal
+equal
+equal
+equal
+equal
+  4822  6395 1166021.29  418  319 1169762.87 1166021.29  0.32%   333  803s
+equal
+equal
+equal
+  6767  8427 1166021.29  574  337 1169762.87 1166021.29  0.32%   303  834s
+equal
+equal
+equal
+equal
+equal
+equal
+equal
+equal
+equal
+equal
+  8855  8428 1166021.29  293  200 1169762.87 1166021.29  0.32%   286  961s
+equal
+  8857  8429 1166021.29  431   90 1169762.87 1166021.29  0.32%   286  967s
+equal
+  8858  8430 1166021.29  239  164 1169762.87 1166021.29  0.32%   286  974s
+mpiexec aborting job...
+Terminate batch job (Y/N)?
+^C
+C:\Users\Anton Hinneck\AppData\Local\Programs\Julia\Julia-1.4.1\bin>cmd \k
+Microsoft Windows [Version 10.0.18362.778]
+(c) 2019 Microsoft Corporation. All rights reserved.

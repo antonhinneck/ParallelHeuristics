@@ -1,0 +1,156 @@
+C:\Users\Anton Hinneck\Google Drive\Research\TransmissionSwitching\MPI>SET JuliaPath="C:\Users\Anton Hinneck\AppData\Local\Julia-1.2.0-rc2\bin"
+
+C:\Users\Anton Hinneck\Google Drive\Research\TransmissionSwitching\MPI>SET ProgramDir="C:\Users\Anton Hinneck\Google Drive\Research\TransmissionSwitching\MPI\Run_MPI.jl"
+
+C:\Users\Anton Hinneck\Google Drive\Research\TransmissionSwitching\MPI>SET LogFile="C:\Users\Anton Hinneck\Desktop\log.txt"
+
+C:\Users\Anton Hinneck\Google Drive\Research\TransmissionSwitching\MPI>cd "C:\Users\Anton Hinneck\AppData\Local\Julia-1.2.0-rc2\bin"
+
+C:\Users\Anton Hinneck\AppData\Local\Julia-1.2.0-rc2\bin>mpiexec -hosts 2 localhost 1,8 localhost 1,7 julia "C:\Users\Anton Hinneck\Google Drive\Research\TransmissionSwitching\MPI\Run_MPI.jl"
+Göî Warning: Package Gurobi does not have SparseArrays in its dependencies:
+Göé - If you have Gurobi checked out for development and have
+Göé   added SparseArrays as a dependency but haven't updated your primary
+Göé   environment's manifest file, try `Pkg.resolve()`.
+Göé - Otherwise you may need to report an issue with Gurobi
+Göö Loading SparseArrays into Gurobi from project dependency, future warnings for Gurobi are suppressed.
+Göî Warning: Package Gurobi does not have SparseArrays in its dependencies:
+Göé - If you have Gurobi checked out for development and have
+Göé   added SparseArrays as a dependency but haven't updated your primary
+Göé   environment's manifest file, try `Pkg.resolve()`.
+Göé - Otherwise you may need to report an issue with Gurobi
+Göö Loading SparseArrays into Gurobi from project dependency, future warnings for Gurobi are suppressed.
+-------------
+-------------
+Academic license - for non-commercial use only
+Academic license - for non-commercial use only
+Academic license - for non-commercial use only
+Optimize a model with 10932 rows, 5596 columns and 29748 nonzeros
+Variable types: 3605 continuous, 1991 integer (1991 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 2e+06]
+  Objective range  [3e+01, 1e+04]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [6e-03, 2e+06]
+Presolve removed 4426 rows and 1786 columns
+Presolve time: 0.09s
+Presolved: 6506 rows, 3810 columns, 21662 nonzeros
+Variable types: 2273 continuous, 1537 integer (1537 binary)
+
+Root relaxation: objective 1.097782e+06, 4410 iterations, 0.19 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 1097782.23    0  127          - 1097782.23      -     -    2s
+     0     0 1100241.64    0  201          - 1100241.64      -     -    2s
+     0     0 1100241.64    0  199          - 1100241.64      -     -    2s
+     0     0 1101003.08    0  208          - 1101003.08      -     -    2s
+     0     0 1101003.08    0  198          - 1101003.08      -     -    3s
+     0     0 1101003.08    0  200          - 1101003.08      -     -    3s
+     0     0 1101003.08    0  199          - 1101003.08      -     -    3s
+     0     0 1101003.08    0   61          - 1101003.08      -     -    4s
+     0     0 1101003.08    0   69          - 1101003.08      -     -    4s
+     0     0 1101003.08    0   45          - 1101003.08      -     -    4s
+     0     0 1101003.08    0   48          - 1101003.08      -     -    4s
+----------------------------------------------------------------------------
+[INFO] Message received from heuristic on rank 1.
+[INFO] Solution(s) Found: 1, Solution(s) Passed: 1
+----------------------------------------------------------------------------
+SolNr 1, ObjVal: 1.1217086931299008e6 CT: 0.14461517333984375 <
+----------------------------------------------------------------------------
+     0     0 1101003.08    0   43          - 1101003.08      -     -    5s
+     0     0 1101003.08    0   43          - 1101003.08      -     -    5s
+H    0     0                    1121708.6931 1101003.08  1.85%     -    5s
+     0     0 1101003.08    0   42 1121708.69 1101003.08  1.85%     -    5s
+     0     0 1101003.08    0   42 1121708.69 1101003.08  1.85%     -    5s
+     0     0 1101003.08    0   37 1121708.69 1101003.08  1.85%     -    5s
+     0     2 1101003.08    0   37 1121708.69 1101003.08  1.85%     -    7s
+    43    43 1101003.08   11   71 1121708.69 1101003.08  1.85%   355   10s
+   243   243 1101146.37   88  225 1121708.69 1101003.08  1.85%   238   15s
+   431   405 1101366.02  143  265 1121708.69 1101003.08  1.85%   276   21s
+   583   541 1109502.55  205  329 1121708.69 1101003.08  1.85%   272   25s
+   867   814 1110913.93  327  283 1121708.69 1101003.08  1.85%   264   32s
+  1206  1133 1109991.47  416  211 1121708.69 1101003.08  1.85%   241   37s
+  1501  1399 1101003.08   19  113 1121708.69 1101003.08  1.85%   232   42s
+  1811  1689 1101003.08   49   82 1121708.69 1101003.08  1.85%   223   47s
+----------------------------------------------------------------------------
+[INFO] Message received from heuristic on rank 1.
+[INFO] Solution(s) Found: 8, Solution(s) Passed: 8
+----------------------------------------------------------------------------
+SolNr 1, ObjVal: 1.1104535685866296e6 CT: 40.00103950500488 <
+SolNr 2, ObjVal: 1.110454576707667e6 CT: 40.00103950500488 <
+SolNr 3, ObjVal: 1.1104803956740631e6 CT: 40.00103950500488 <
+SolNr 4, ObjVal: 1.110512207072236e6 CT: 40.00103950500488 <
+SolNr 5, ObjVal: 1.1157072577219778e6 CT: 40.00103950500488 <
+SolNr 6, ObjVal: 1.1157083426947435e6 CT: 40.00103950500488 <
+SolNr 7, ObjVal: 1.1170838034795132e6 CT: 40.00103950500488 <
+SolNr 8, ObjVal: 1.1698916791070607e6 CT: 40.00103950500488 <
+----------------------------------------------------------------------------
+H 1963  1840                    1121555.7699 1101003.08  1.83%   218   52s
+H 1963  1738                    1110453.5686 1101003.08  0.85%   218   52s
+  2056  1830 1101003.08  101   75 1110453.57 1101003.08  0.85%   215   55s
+  2209  1955 1101003.08   84   37 1110453.57 1101003.08  0.85%   214   61s
+  2214  1958 1101003.08   33   56 1110453.57 1101003.08  0.85%   214   65s
+----------------------------------------------------------------------------
+[INFO] Message received from heuristic on rank 1.
+[INFO] Solution(s) Found: 10, Solution(s) Passed: 10
+----------------------------------------------------------------------------
+SolNr 1, ObjVal: 1.1206486286003366e6 CT: 15.355937957763672 <
+SolNr 2, ObjVal: 1.1206486555417508e6 CT: 15.355937957763672 <
+SolNr 3, ObjVal: 1.1206508780061714e6 CT: 15.355937957763672 <
+SolNr 4, ObjVal: 1.1207915714001579e6 CT: 15.355937957763672 <
+SolNr 5, ObjVal: 1.1207916085378756e6 CT: 15.355937957763672 <
+SolNr 6, ObjVal: 1.1207922332719774e6 CT: 15.355937957763672 <
+SolNr 7, ObjVal: 1.1209292528738976e6 CT: 15.355937957763672 <
+SolNr 8, ObjVal: 1.1209295454691278e6 CT: 15.355937957763672 <
+SolNr 9, ObjVal: 1.1212348595718937e6 CT: 15.355937957763672 <
+SolNr 10, ObjVal: 1.1231363711355918e6 CT: 15.355937957763672 <
+----------------------------------------------------------------------------
+  2227  1967 1110438.57  301   39 1110453.57 1101003.08  0.85%   212   70s
+  2234  1972 1105792.07  574   29 1110453.57 1101003.08  0.85%   212   76s
+  2240  1980 1101003.08   12   45 1110453.57 1101003.08  0.85%   223   81s
+  2255  1988 1101003.24   14   42 1110453.57 1101003.08  0.85%   222   86s
+  2271  1995 1101003.29   17   47 1110453.57 1101003.08  0.85%   222   92s
+  2288  2008 1101027.49   20   46 1110453.57 1101003.08  0.85%   222   98s
+  2349  2043 1101131.43   29  137 1110453.57 1101003.08  0.85%   220  107s
+----------------------------------------------------------------------------
+[INFO] Message received from heuristic on rank 1.
+[INFO] Solution(s) Found: 10, Solution(s) Passed: 10
+----------------------------------------------------------------------------
+SolNr 1, ObjVal: 1.1206563566886955e6 CT: 40.00203323364258 <
+SolNr 2, ObjVal: 1.1206566287885858e6 CT: 40.00203323364258 <
+SolNr 3, ObjVal: 1.120668834375139e6 CT: 40.00203323364258 <
+SolNr 4, ObjVal: 1.1206688346727795e6 CT: 40.00203323364258 <
+SolNr 5, ObjVal: 1.12072462536969e6 CT: 40.00203323364258 <
+SolNr 6, ObjVal: 1.121016208974021e6 CT: 40.00203323364258 <
+SolNr 7, ObjVal: 1.1210340517791419e6 CT: 40.00203323364258 <
+SolNr 8, ObjVal: 1.1210340550862711e6 CT: 40.00203323364258 <
+SolNr 9, ObjVal: 1.1213227573585245e6 CT: 40.00203323364258 <
+SolNr 10, ObjVal: 1.1213262707189778e6 CT: 40.00203323364258 <
+----------------------------------------------------------------------------
+  2455  2117 1101131.43   43   84 1110453.57 1101003.08  0.85%   219  113s
+  2591  2206 1101131.43   63  152 1110453.57 1101003.08  0.85%   219  119s
+  2851  2370 1101131.43  104  192 1110453.57 1101003.08  0.85%   214  123s
+  2968  2451 1101131.43  127  137 1110453.57 1101003.08  0.85%   215  135s
+  3068  2518 1101131.43  150  134 1110453.57 1101003.08  0.85%   216  140s
+
+Cutting planes:
+  Learned: 2
+  Gomory: 58
+  Cover: 21
+  Implied bound: 4
+  Projected implied bound: 1
+  MIR: 10
+  StrongCG: 1
+  Flow cover: 37
+  Network: 2
+
+Explored 3167 nodes (713062 simplex iterations) in 140.03 seconds
+Thread count was 3 (of 4 available processors)
+
+Solution count 3: 1.11045e+06 1.12156e+06 1.12171e+06
+
+Time limit reached
+Best objective 1.110453568587e+06, best bound 1.101003084177e+06, gap 0.8510%
+[INFO] RANK 0: WAITING FOR WORKER THREADS TO TERMINATE.
+[INFO] RANK 0 TERMINATED.

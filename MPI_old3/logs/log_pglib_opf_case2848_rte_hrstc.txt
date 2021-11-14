@@ -1,0 +1,125 @@
+C:\Users\Anton Hinneck\AppData\Local\Julia-1.2.0-rc2\bin>mpiexec -hosts 2 localhost 1,8 localhost 1,7 julia "C:\Users\Anton Hinneck\Google Drive\Research\TransmissionSwitching\MPI\Run_MPI.jl"
+Γöî Warning: Package Gurobi does not have SparseArrays in its dependencies:
+Γöé - If you have Gurobi checked out for development and have
+Γöé   added SparseArrays as a dependency but haven't updated your primary
+Γöé   environment's manifest file, try `Pkg.resolve()`.
+Γöé - Otherwise you may need to report an issue with Gurobi
+Γöö Loading SparseArrays into Gurobi from project dependency, future warnings for Gurobi are suppressed.
+Γöî Warning: Package Gurobi does not have SparseArrays in its dependencies:
+Γöé - If you have Gurobi checked out for development and have
+Γöé   added SparseArrays as a dependency but haven't updated your primary
+Γöé   environment's manifest file, try `Pkg.resolve()`.
+Γöé - Otherwise you may need to report an issue with Gurobi
+Γöö Loading SparseArrays into Gurobi from project dependency, future warnings for Gurobi are suppressed.
+-------------
+-------------
+[INFO] BIG M equals to 10000
+Academic license - for non-commercial use only
+Academic license - for non-commercial use only
+Academic license - for non-commercial use only
+Academic license - for non-commercial use only
+Optimize a model with 21347 rows, 10947 columns and 56806 nonzeros
+Variable types: 7171 continuous, 3776 integer (3776 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 2e+06]
+  Objective range  [5e-01, 1e+02]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [1e-01, 1e+04]
+Presolve removed 9130 rows and 3667 columns
+Presolve time: 0.15s
+Presolved: 12217 rows, 7280 columns, 40459 nonzeros
+Variable types: 4356 continuous, 2924 integer (2924 binary)
+
+Root relaxation: objective 1.045576e+06, 8734 iterations, 0.45 seconds
+Optimize a model with 17571 rows, 7171 columns and 30374 nonzeros
+Coefficient statistics:
+  Matrix range     [1e+00, 2e+06]
+  Objective range  [5e-01, 1e+02]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [1e-01, 3e+05]
+Presolve removed 14155 rows and 3436 columns
+Presolve time: 0.03s
+Presolved: 3416 rows, 3735 columns, 12025 nonzeros
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    0.0000000e+00   7.152817e+04   0.000000e+00      0s
+Warning: Markowitz tolerance tightened to 0.03125
+    1659    1.0455764e+06   0.000000e+00   0.000000e+00      0s
+
+Solved in 1659 iterations and 0.25 seconds
+Optimal objective  1.045576425e+06
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 1045576.43    0  195          - 1045576.43      -     -    1s
+     0     0 1045576.43    0  293          - 1045576.43      -     -    2s
+     0     0 1045576.43    0  291          - 1045576.43      -     -    2s
+     0     0 1045576.43    0   87          - 1045576.43      -     -    4s
+     0     0 1045576.43    0   93          - 1045576.43      -     -    5s
+     0     0 1045576.43    0   46          - 1045576.43      -     -    6s
+     0     0 1045576.43    0   47          - 1045576.43      -     -    6s
+     0     0 1045576.43    0   39          - 1045576.43      -     -    6s
+     0     0 1045576.43    0   46          - 1045576.43      -     -    6s
+     0     0 1045576.43    0   38          - 1045576.43      -     -    7s
+     0     0 1045576.43    0   38          - 1045576.43      -     -    7s
+     0     0 1045576.43    0   36          - 1045576.43      -     -    7s
+     0     0 1045576.43    0   34          - 1045576.43      -     -    7s
+     0     0 1045576.43    0   34          - 1045576.43      -     -    8s
+     0     2 1045576.43    0   34          - 1045576.43      -     -    9s
+     3     7 1045576.43    2   44          - 1045576.43      -   173   10s
+   185   187 1045576.43   44   75          - 1045576.43      -  92.6   15s
+   344   343 1045576.43  101  109          - 1045576.43      -   121   20s
+   580   575 1045576.43  179  215          - 1045576.43      -   138   26s
+   714   711 1045576.43  222  226          - 1045576.43      -   155   31s
+   862   860 1045576.43  258  241          - 1045576.43      -   171   35s
+  1036  1033 1045576.43  305  266          - 1045576.43      -   179   41s
+  1219  1213 1045576.43  363  305          - 1045576.43      -   187   46s
+  1398  1394 1045576.43  419  308          - 1045576.43      -   196   52s
+  1520  1516 1045576.43  440  296          - 1045576.43      -   197   56s
+  1727  1725 infeasible  497               - 1045576.43      -   201   63s
+  1835  1833 1045576.43  521  294          - 1045576.43      -   202   67s
+  1908  1899 1045576.43  540  290          - 1045576.43      -   207   71s
+  2017  2009 1045576.43  574  297          - 1045576.43      -   207   75s
+  2097  2088 1045576.43  598  278          - 1045576.43      -   208   80s
+  2275  2266 1045576.43  645  147          - 1045576.43      -   215   89s
+  2394  2385 1045576.43  693  171          - 1045576.43      -   216   93s
+  2477  2469 1045576.43  724  184          - 1045576.43      -   219   98s
+  2563  2555 1047604.89  752  167          - 1045576.43      -   220  103s
+  2641  2629 1045576.43  770  228          - 1045576.43      -   224  108s
+  2745  2736 1045576.43  799  186          - 1045576.43      -   223  114s
+  2812  2798 1045576.43  819  186          - 1045576.43      -   228  119s
+  2898  2885 1045576.43  852  119          - 1045576.43      -   230  126s
+  2971  2952 1045576.43  880  111          - 1045576.43      -   234  133s
+  3049  3035 1045576.43  908  130          - 1045576.43      -   234  139s
+  3116  3097 1045576.43  921   81          - 1045576.43      -   239  146s
+  3201  3180 1045576.43  950   64          - 1045576.43      -   239  153s
+  3249  3227 1045576.43  966  106          - 1045576.43      -   245  159s
+  3353  3331 1045576.43 1000   96          - 1045576.43      -   244  166s
+  3403  3377 1045576.43 1015  159          - 1045576.43      -   250  174s
+  3502  3473 1045576.43 1045  145          - 1045576.43      -   250  180s
+
+Cutting planes:
+  Learned: 1
+  Gomory: 30
+  Cover: 24
+  Implied bound: 13
+  MIR: 28
+  StrongCG: 1
+  Flow cover: 4
+
+Explored 3557 nodes (937599 simplex iterations) in 180.02 seconds
+Thread count was 3 (of 4 available processors)
+
+Solution count 0
+
+Time limit reached
+Best objective -, best bound 1.045576425115e+06, gap -
+[INFO] Global optimal solution found.
+[INFO] Rank 0 terminated.
+[INFO] BIG M equals to 8.360056716348311e10
+Academic license - for non-commercial use only
+Academic license - for non-commercial use only
+Optimize a model with 17650 rows, 7250 columns and 30927 nonzeros
+Variable types: 7171 continuous, 79 integer (79 binary)
+Coefficient statistics:

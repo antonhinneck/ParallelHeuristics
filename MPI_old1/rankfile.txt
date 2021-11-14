@@ -1,0 +1,2 @@
+rank 0=A.univ.edu slot=0
+rank 1=B.univ.edu slot=0

@@ -1,0 +1,89 @@
+[ Info: Recompiling stale cache file C:\Users\Anton Hinneck\.julia\compiled\v1.2\Gurobi\do9v6.ji for Gurobi [2e9cd046-0924-5485-92f1-d5272153d98b]
++ Warning: Package Gurobi does not have SparseArrays in its dependencies:
+¦ - If you have Gurobi checked out for development and have
+¦   added SparseArrays as a dependency but haven't updated your primary
+¦   environment's manifest file, try `Pkg.resolve()`.
+¦ - Otherwise you may need to report an issue with Gurobi
++ Loading SparseArrays into Gurobi from project dependency, future warnings for Gurobi are suppressed.
+Academic license - for non-commercial use only
+-------------
+Academic license - for non-commercial use only
+Academic license - for non-commercial use only
+Optimize a model with 10932 rows, 5596 columns and 29748 nonzeros
+Variable types: 3605 continuous, 1991 integer (1991 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 2e+06]
+  Objective range  [3e+01, 1e+04]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [6e-03, 2e+06]
+Presolve removed 4426 rows and 1786 columns
+Presolve time: 0.08s
+Presolved: 6506 rows, 3810 columns, 21662 nonzeros
+Variable types: 2273 continuous, 1537 integer (1537 binary)
+
+Root relaxation: objective 1.097782e+06, 4410 iterations, 0.14 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 1097782.23    0  127          - 1097782.23      -     -    0s
+     0     0 1100241.64    0  201          - 1100241.64      -     -    1s
+     0     0 1100241.64    0  199          - 1100241.64      -     -    1s
+     0     0 1101003.08    0  208          - 1101003.08      -     -    1s
+     0     0 1101003.08    0  198          - 1101003.08      -     -    1s
+     0     0 1101003.08    0  200          - 1101003.08      -     -    1s
+     0     0 1101003.08    0  199          - 1101003.08      -     -    1s
+     0     0 1101003.08    0   61          - 1101003.08      -     -    2s
+     0     0 1101003.08    0   69          - 1101003.08      -     -    2s
+     0     0 1101003.08    0   45          - 1101003.08      -     -    3s
+     0     0 1101003.08    0   48          - 1101003.08      -     -    3s
+     0     0 1101003.08    0   43          - 1101003.08      -     -    3s
+     0     0 1101003.08    0   43          - 1101003.08      -     -    3s
+     0     0 1101003.08    0   42          - 1101003.08      -     -    4s
+     0     0 1101003.08    0   42          - 1101003.08      -     -    4s
+     0     0 1101003.08    0   42          - 1101003.08      -     -    4s
+     0     2 1101003.08    0   42          - 1101003.08      -     -    5s
+   186   182 1101003.08   41   88          - 1101003.08      -   226   11s
+   439   428 1101003.08   99   75          - 1101003.08      -   246   16s
+   799   773 1101003.08  182   84          - 1101003.08      -   245   21s
+  1089  1051 1101003.08  241   97          - 1101003.08      -   236   25s
+  1746  1647 infeasible  454               - 1101003.08      -   214   31s
+  2276  2131 1101003.08   10  101          - 1101003.08      -   199   35s
+  2880  2694 1101003.08   51   76          - 1101003.08      -   190   42s
+  3259  3053 1105851.56  105  112          - 1101003.08      -   190   47s
+  3515  3302 1101003.08  130  100          - 1101003.08      -   186   50s
+  4104  3836 1101003.08   19   69          - 1101003.08      -   177   55s
+  4114  3843 1101003.08   97   38          - 1101003.08      -   176   60s
+  4128  3855 1101003.08   13   61          - 1101003.08      -   6.0   66s
+  4138  3863 1109798.56   15   77          - 1101003.08      -   6.3   70s
+  4164  3878 1101003.08   18   69          - 1101003.08      -   7.1   75s
+  4210  3908 1101003.08   24   80          - 1101003.08      -   9.2   85s
+  4287  3956 1101003.08   35  104          - 1101003.08      -  11.9   93s
+  4571  4145 1101006.21   81   88          - 1101003.08      -  19.4   97s
+  4787  4295 1101007.45  112  106          - 1101003.08      -  24.2  101s
+  5104  4485 1101007.45  160  109          - 1101003.08      -  30.8  107s
+  5277  4605 1101120.06  188  106          - 1101003.08      -  34.6  110s
+  5601  4820 1101120.06  228  140          - 1101003.08      -  42.1  117s
+  5690  4868 1101120.06  248  145          - 1101003.08      -  45.7  120s
+  5925  5029 1101120.06  277  139          - 1101003.08      -  52.6  127s
+  6062  5128 1101120.06  294  141          - 1101003.08      -  55.5  131s
+  6204  5191 1101120.06  309  149          - 1101003.08      -  59.2  135s
+  6475  5409 1101120.06  324  151          - 1101003.08      -  61.1  140s
+
+Cutting planes:
+  Learned: 1
+  Gomory: 36
+  Cover: 21
+  Implied bound: 2
+  Clique: 1
+  MIR: 8
+  StrongCG: 2
+  Flow cover: 40
+
+Explored 6741 nodes (1168162 simplex iterations) in 140.03 seconds
+Thread count was 4 (of 4 available processors)
+
+Solution count 0
+
+Time limit reached
+Best objective -, best bound 1.101003084176e+06, gap -

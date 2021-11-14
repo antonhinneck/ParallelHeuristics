@@ -1,0 +1,38 @@
+Academic license - for non-commercial use only
+Variable Indexes:
+generation:[1, 297]
+theta:     [2829, 3023]
+power_flow:[4717, 7247]
+switched:  [298, 2828]
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (win64)
+Optimize a model with 16085 rows, 7247 columns and 39804 nonzeros
+Model fingerprint: 0x690d89d3
+Variable types: 4716 continuous, 2531 integer (2531 binary)
+Coefficient statistics:
+  Matrix range     [4e-01, 2e+04]
+  Objective range  [3e+02, 1e+04]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [1e-03, 2e+04]
+
+User MIP start produced solution with objective 1.24637e+06 (0.07s)
+Loaded user MIP start with objective 1.24637e+06
+
+Presolve removed 8063 rows and 2497 columns
+Presolve time: 0.06s
+Presolved: 8022 rows, 4750 columns, 26574 nonzeros
+Variable types: 2820 continuous, 1930 integer (1930 binary)
+
+Root relaxation: cutoff, 5269 iterations, 0.11 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0     cutoff    0      1246365.29 1246365.29  0.00%     -    0s
+
+Explored 0 nodes (5269 simplex iterations) in 0.39 seconds
+Thread count was 16 (of 16 available processors)
+
+Solution count 1: 1.24637e+06
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.246365290964e+06, best bound 1.246365290964e+06, gap 0.0000%

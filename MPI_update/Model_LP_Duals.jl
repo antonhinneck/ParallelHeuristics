@@ -1,0 +1,116 @@
+function solve_TS_LP_Duals(grb_env, data, line_vector::Array{Bool,1}; threads = 1)
+
+    @inline function restrictiveM()
+        out = Dict{Int64, Float64}()
+        for i in 1:length(data.lines)
+            l = data.lines[i]
+            push!(out, l => (1 / data.line_reactance[l]) * abs(THETAMAX - THETAMIN))
+        end
+        return out
+    end
+
+    M = restrictiveM()
+    len_lines = length(data.lines)
+    # TS = Model(with_optimizer(Gurobi.Optimizer, grb_env, Threads = threads, OutputFlag = 0))
+    TS = Model(optimizer_with_attributes(() -> Gurobi.Optimizer(grb_env), "Threads" => threads,  "OutputFlag" => 0))
+
+    @variable(TS, generation[data.generators] >= 0)
+    @variable(TS, theta[data.buses])
+    @variable(TS, power_flow[data.lines])
+    @variable(TS, 0 <= switched[data.lines] <= 1)
+
+    #Minimal generation costs
+    @objective(TS, Min, sum(data.generator_costs[g] * generation[g] * data.base_mva for g in data.generators))
+
+    #Current law
+    @constraint(TS, market_clearing[n = data.buses],
+    sum(generation[g] for g in data.generators_at_bus[n]) + sum(power_flow[l] for l in data.lines_start_at_bus[n]) - sum(power_flow[l] for l in data.lines_end_at_bus[n]) == data.bus_demand[n] / data.base_mva)
+
+    #Voltage law
+    @constraint(TS, voltage_1[l = data.lines],
+    (1 / data.line_reactance[l]) * (theta[data.line_start[l]] - theta[data.line_end[l]]) + (1 - switched[l]) * M[l] >= power_flow[l])
+
+    @constraint(TS, voltage_2[l = data.lines],
+    (1 / data.line_reactance[l]) * (theta[data.line_start[l]] - theta[data.line_end[l]]) <= power_flow[l] + (1 - switched[l]) * M[l])
+
+    #Capacity constraint
+    @constraint(TS, production_capacity[g = data.generators], generation[g] <= data.generator_capacity[g] / data.base_mva)
+
+    #Angle limits
+    @constraint(TS, theta_limit1[n = data.buses], theta[n] <= THETAMAX)
+    @constraint(TS, theta_limit2[n = data.buses], theta[n] >= THETAMIN)
+
+    #Line limit
+    @constraint(TS, power_flow_limit_1[l in data.lines], power_flow[l] <= (data.line_capacity[l] / data.base_mva) * switched[l])
+    @constraint(TS, power_flow_limit_2[l in data.lines], power_flow[l] >= (-data.line_capacity[l] / data.base_mva) * switched[l])
+
+    #Line status
+    alpha1 = @constraint(TS, on[l = data.lines; line_vector[l]], switched[l] == 1)
+    alpha2 = @constraint(TS, off[l = data.lines; !line_vector[l]], switched[l] == 0)
+
+    optimize!(TS)
+    grb_model = backend(TS).optimizer.model.inner
+    time = Gurobi.get_runtime(grb_model)
+    status = termination_status(TS)
+    objective = 0.0
+    solution = [0.0]
+    dual_indicators = [false]
+
+    if status == MOI.TerminationStatusCode(1)
+
+        @inline function expand(arr::Array{Float64, 1}, idctr::Array{Bool, 1})
+            output = Vector{Float64}()
+            ctr = 1
+            for i in 1:length(idctr)
+                if idctr[ctr]
+                    push!(output, arr[ctr])
+                    ctr += 1
+                else
+                    push!(output, 0.0)
+                end
+            end
+            return output
+        end
+
+        @inline function line_vector_real()
+            out = Vector{Float64}()
+            for i in 1:length(data.lines)
+                if line_vector[i]
+                    push!(out, 1.0)
+                else
+                    push!(out, 0.0)
+                end
+            end
+            return out
+        end
+
+        objective = objective_value(TS)
+
+        #grb_model = backend(TS).optimizer.model.inner
+        #nv = Gurobi.get_intattr(grb_model, "NumVars")
+        @inline function convertArray(type::Type, array::T where T <: Array{Bool, 1})
+
+            out = Vector{type}()
+            for i in 1:length(array)
+                if array[i]
+                    push!(out, 1.0)
+                else
+                    push!(out, 0.0)
+                end
+            end
+            return out
+        end
+
+        @inline function get_solution_vector()
+            output = [value.(generation).data...,
+                      convertArray(Float64, line_vector)...,
+                      value.(theta).data...,
+                      line_vector_real()...]
+            return output
+        end
+
+        solution = get_solution_vector()
+    end
+
+    return time, status, objective, solution, dual.(alpha1), dual.(alpha2)
+end

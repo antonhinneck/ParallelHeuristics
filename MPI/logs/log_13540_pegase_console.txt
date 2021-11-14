@@ -1,0 +1,157 @@
+Variable Indexes:
+generation:[1, 4092]
+theta:     [24560, 38218]
+power_flow:[38219, 58685]
+switched:  [4093, 24559]
+Optimize a model with 126937 rows, 58685 columns and 322040 nonzeros
+Variable types: 38218 continuous, 20467 integer (20467 binary)
+Coefficient statistics:
+  Matrix range     [1e-02, 7e+03]
+  Objective range  [4e+00, 1e+04]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [1e-04, 7e+03]
+Presolve removed 51474 rows and 12436 columns
+Presolve time: 0.60s
+Presolved: 75463 rows, 46249 columns, 249694 nonzeros
+Variable types: 27375 continuous, 18874 integer (18874 binary)
+
+Root relaxation: objective 6.690737e+06, 51832 iterations, 3.06 seconds
+Total elapsed time = 10.12s
+Total elapsed time = 15.47s
+Total elapsed time = 21.46s
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 6690736.76    0 1824          - 6690736.76      -     -   25s
+     0     0 6690754.43    0 3163          - 6690754.43      -     -   63s
+----------------------------------------------------------------------------
+[INFO] Message received from heuristic on rank 1.
+[INFO] Solution(s) Found: 1, Solution(s) Passed: 1
+----------------------------------------------------------------------------
+SolNr 1, ObjVal: 6.782076130677587e6 CT: 3.4019012451171875 <
+----------------------------------------------------------------------------
+     0     0 6690754.43    0 3187          - 6690754.43      -     -   67s
+H    0     0                    6782076.1307 6690754.43  1.35%     -   68s
+objective
+     0     0 6690766.21    0 3553 6782076.13 6690766.21  1.35%     -   85s
+----------------------------------------------------------------------------
+[INFO] Message received from heuristic on rank 1.
+[INFO] Solution(s) Found: 1, Solution(s) Passed: 1
+----------------------------------------------------------------------------
+SolNr 1, ObjVal: 6.782076130677812e6 CT: 6.634260177612305 <
+----------------------------------------------------------------------------
+     0     0 6690778.45    0 4510 6782076.13 6690778.45  1.35%     -  141s
+     0     0 6690779.20    0 4454 6782076.13 6690779.20  1.35%     -  145s
+     0     0 6690785.33    0 4562 6782076.13 6690785.33  1.35%     -  165s
+     0     0 6690785.33    0 1898 6782076.13 6690785.33  1.35%     -  191s
+----------------------------------------------------------------------------
+[INFO] Message received from heuristic on rank 1.
+[INFO] Solution(s) Found: 1, Solution(s) Passed: 1
+----------------------------------------------------------------------------
+SolNr 1, ObjVal: 6.781097576176184e6 CT: 105.91879844665527 <
+----------------------------------------------------------------------------
+
+----------------------------------------------------------------------------
+[INFO] Message received from heuristic on rank 1.
+[INFO] Solution(s) Found: 1, Solution(s) Passed: 1
+----------------------------------------------------------------------------
+SolNr 1, ObjVal: 6.778211170794746e6 CT: 117.35920906066895 <
+----------------------------------------------------------------------------
+H    0     2                    6781097.5762 6690785.33  1.33%     -  296s
+H    0     2                    6778211.1708 6690785.33  1.29%     -  296s
+     0     2 6690785.33    0 1244 6778211.17 6690785.33  1.29%     -  296s
+     1     4 6691307.64    1 2332 6778211.17 6690807.21  1.29% 30731  309s
+----------------------------------------------------------------------------
+[INFO] Message received from heuristic on rank 1.
+[INFO] Solution(s) Found: 1, Solution(s) Passed: 1
+----------------------------------------------------------------------------
+SolNr 1, ObjVal: 6.778211170794746e6 CT: 254.68303680419922 <
+----------------------------------------------------------------------------
+     3     8 6691431.44    2 2614 6778211.17 6690808.73  1.29% 13968  335s
+     7    16 6692167.99    3 3102 6778211.17 6690936.76  1.29% 14635  370s
+    15    28 6692385.41    4 3219 6778211.17 6690951.83  1.29% 13306  419s
+    27    40 6692387.69    5 3263 6778211.17 6690955.25  1.29% 12034  460s
+    39    48 6692401.47    6 3262 6778211.17 6690971.15  1.29% 10075  492s
+    51    53 6692412.21    7 3262 6778211.17 6690990.05  1.29%  8677  497s
+    63    63 6692470.95    8 3256 6778211.17 6690990.99  1.29%  7097  503s
+    86    87 6692495.75   10 3252 6778211.17 6690999.63  1.29%  5305  519s
+   106   107 6692532.24   12 3250 6778211.17 6690999.63  1.29%  4479  553s
+----------------------------------------------------------------------------
+[INFO] Message received from heuristic on rank 1.
+[INFO] Solution(s) Found: 1, Solution(s) Passed: 1
+----------------------------------------------------------------------------
+SolNr 1, ObjVal: 6.777695196637076e6 CT: 478.76390075683594 <
+----------------------------------------------------------------------------
+H  152   154                    6777695.1966 6690999.63  1.28%  3446  579s
+----------------------------------------------------------------------------
+[INFO] Message received from heuristic on rank 1.
+[INFO] Solution(s) Found: 1, Solution(s) Passed: 1
+----------------------------------------------------------------------------
+SolNr 1, ObjVal: 6.775207571127406e6 CT: 508.8714027404785 <
+----------------------------------------------------------------------------
+H  247   247                    6775207.5711 6690999.63  1.24%  2346  641s
+----------------------------------------------------------------------------
+[INFO] Message received from heuristic on rank 1.
+[INFO] Solution(s) Found: 1, Solution(s) Passed: 1
+----------------------------------------------------------------------------
+SolNr 1, ObjVal: 6.773338467834123e6 CT: 564.9065780639648 <
+----------------------------------------------------------------------------
+H  396   400                    6773338.4678 6690999.63  1.22%  1852  720s
+----------------------------------------------------------------------------
+[INFO] Message received from heuristic on rank 1.
+[INFO] Solution(s) Found: 1, Solution(s) Passed: 1
+----------------------------------------------------------------------------
+SolNr 1, ObjVal: 6.773225930977667e6 CT: 643.6031627655029 <
+----------------------------------------------------------------------------
+H  533   531                    6773225.9310 6690999.63  1.21%  1817  818s
+   656   659 6692532.44   41 3536 6773225.93 6690999.63  1.21%  1961  973s
+----------------------------------------------------------------------------
+[INFO] Message received from heuristic on rank 1.
+[INFO] Solution(s) Found: 1, Solution(s) Passed: 1
+----------------------------------------------------------------------------
+SolNr 1, ObjVal: 6.773070355427479e6 CT: 907.1445140838623 <
+----------------------------------------------------------------------------
+H  800   801                    6773070.3554 6690999.63  1.21%  2134 1377s
+
+----------------------------------------------------------------------------
+[INFO] Message received from heuristic on rank 1.
+[INFO] Solution(s) Found: 1, Solution(s) Passed: 1
+----------------------------------------------------------------------------
+SolNr 1, ObjVal: 6.771542657689776e6 CT: 1544.240068435669 <
+----------------------------------------------------------------------------
+H  990   993                    6771542.6577 6690999.63  1.19%  2225 1905s
+ERROR: LoadError: MethodError: no method matching index(::Float64)
+Closest candidates are:
+  index(!Matched::VariableRef) at C:\Users\Anton Hinneck\.julia\packages\JuMP\iGamg\src\variables.jl:197
+  index(!Matched::ConstraintRef) at C:\Users\Anton Hinneck\.julia\packages\JuMP\iGamg\src\JuMP.jl:574
+Stacktrace:
+ [1] #solve_TS_MIP_Deco#22(::Bool, ::Int64, ::Int64, ::Bool, ::typeof(solve_TS_MIP_Deco), ::Gurobi.Env, ::Main.PowerGrids.PowerGrid, ::Array{Bool,1}, ::Array{Bool,1}, ::Array{Bool,1}) at C:\Users\Anton Hinneck\Google Drive\Research\TransmissionSwitching\MPI\Model_MIP_Decomposition.jl:173
+ [2] (::getfield(Main, Symbol("#kw##solve_TS_MIP_Deco")))(::NamedTuple{(:threads, :time_limit),Tuple{Int64,Int64}}, ::typeof(solve_TS_MIP_Deco), ::Gurobi.Env, ::Main.PowerGrids.PowerGrid, ::Array{Bool,1}, ::Array{Bool,1}, ::Array{Bool,1}) at .\none:0
+ [3] top-level scope at C:\Users\Anton Hinneck\Google Drive\Research\TransmissionSwitching\MPI\Run_MPI.jl:226
+ [4] include at .\boot.jl:328 [inlined]
+ [5] include_relative(::Module, ::String) at .\loading.jl:1094
+ [6] include(::Module, ::String) at .\Base.jl:31
+ [7] exec_options(::Base.JLOptions) at .\client.jl:295
+ [8] _start() at .\client.jl:464
+in expression starting at C:\Users\Anton Hinneck\Google Drive\Research\TransmissionSwitching\MPI\Run_MPI.jl:90
+
+  1144  1141 6692532.44   74 3654 6771542.66 6690999.63  1.19%  2305 2103s
+
+  1469  1467 6691183.46  101 3716 6771542.66 6690999.63  1.19%  2349 3600s
+
+Cutting planes:
+  Learned: 382
+  Gomory: 68
+  Cover: 867
+  Implied bound: 794
+  Clique: 8
+  MIR: 2113
+  StrongCG: 3
+  Flow cover: 670
+  Zero half: 1
+
+Explored 1524 nodes (3865861 simplex iterations) in 3600.23 seconds
+Thread count was 12 (of 16 available processors)
+
+Solution count 9: 6.77154e+06 6.77307e+06 6.77323e+06 ... 6.78208e+06

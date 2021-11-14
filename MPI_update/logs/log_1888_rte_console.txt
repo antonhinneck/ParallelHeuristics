@@ -1,0 +1,59 @@
+Variable Indexes:
+generation:[1, 297]
+theta:     [2829, 4524]
+power_flow:[4717, 7247]
+switched:  [298, 2828]
+Optimize a model with 16085 rows, 7247 columns and 39804 nonzeros
+Variable types: 4716 continuous, 2531 integer (2531 binary)
+Coefficient statistics:
+  Matrix range     [4e-01, 2e+04]
+  Objective range  [3e+02, 1e+04]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [1e-03, 2e+04]
+Presolve removed 8063 rows and 2497 columns
+Presolve time: 0.05s
+Presolved: 8022 rows, 4750 columns, 26573 nonzeros
+Variable types: 2820 continuous, 1930 integer (1930 binary)
+
+Root relaxation: objective 1.246365e+06, 5164 iterations, 0.10 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 1246365.29    0  109          - 1246365.29      -     -    1s
+     0     0 1246365.29    0  185          - 1246365.29      -     -    1s
+     0     0 1246365.29    0  176          - 1246365.29      -     -    1s
+     0     0 1246365.29    0   46          - 1246365.29      -     -    2s
+     0     0 1246365.29    0   47          - 1246365.29      -     -    2s
+     0     0 1246365.29    0   41          - 1246365.29      -     -    2s
+     0     0 1246365.29    0   49          - 1246365.29      -     -    2s
+     0     0 1246365.29    0   33          - 1246365.29      -     -    3s
+     0     0 1246365.29    0   34          - 1246365.29      -     -    3s
+     0     0 1246365.29    0   33          - 1246365.29      -     -    3s
+     0     0 1246365.29    0   33          - 1246365.29      -     -    3s
+     0     0 1246365.29    0   36          - 1246365.29      -     -    3s
+     0     0 1246365.29    0   36          - 1246365.29      -     -    3s
+     0     0 1246365.29    0   36          - 1246365.29      -     -    4s
+     0     2 1246365.29    0   36          - 1246365.29      -     -    5s
+----------------------------------------------------------------------------
+[INFO] Message received from heuristic on rank 1.
+[INFO] Solution(s) Found: 1, Solution(s) Passed: 1
+----------------------------------------------------------------------------
+SolNr 1, ObjVal: 1.2463652909652872e6 CT: 0.06183433532714844 <
+----------------------------------------------------------------------------
+H    1     4                    1246365.2910 1246365.29  0.00%   836    5s
+
+Cutting planes:
+  Gomory: 30
+  Cover: 17
+  Implied bound: 9
+  MIR: 27
+  Flow cover: 19
+
+Explored 3 nodes (25159 simplex iterations) in 5.71 seconds
+Thread count was 12 (of 16 available processors)
+
+Solution count 1: 1.24637e+06
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.246365290965e+06, best bound 1.246365290964e+06, gap 0.0000%
