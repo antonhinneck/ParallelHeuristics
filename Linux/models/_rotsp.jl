@@ -15,7 +15,7 @@ function solve_TS_MIP_Deco(grb_env, data, Iea::Array{Bool, 1}, Ies::Array{Bool, 
             if Ies[i]
                 push!(switchable, l)
             end
-            push!(out, l => (data.base_mva / data.line_x[l]) * abs(THETAMAX - THETAMIN))
+            push!(out, l => ( 2.0 * data.base_mva / data.line_x[l]) * abs(THETAMAX - THETAMIN))
         end
         return out
     end

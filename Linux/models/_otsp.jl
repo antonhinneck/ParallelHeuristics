@@ -1,4 +1,4 @@
-function solve_TS_MIP(data; heuristic = false, threads = 4, time_limit = 20, start = false, outputflag = 1, logger_active = false, start_dict = nothing)
+function solve_otsp(data; heuristic = false, threads = 4, time_limit = 20, start = false, outputflag = 1, logger_active = false, start_dict = nothing)
 
     time_probed = false
 
@@ -60,8 +60,8 @@ function solve_TS_MIP(data; heuristic = false, threads = 4, time_limit = 20, sta
     @constraint(m, fl1[l in data.lines], f[l] <= data.line_capacity[l]  * z[l])
     @constraint(m, fl2[l in data.lines], f[l] >= -data.line_capacity[l] * z[l])
 
-    #@constraint(m, slack, v[1] == 0.0)
-    #JuMP.fix(v[1], 0.0, force = true)
+    @constraint(m, slack, v[1] == 0.0)
+    JuMP.fix(v[1], 0.0, force = true)
 
     @inline function get_switching_status!(switching_status, solution)
         for i in 1:length(data.lines)
