@@ -1,0 +1,1 @@
+HYDRA_TOPO_DEBUG=1 mpiexec.hydra -n 2 -bind-to core:4 julia run_mpi.jl
