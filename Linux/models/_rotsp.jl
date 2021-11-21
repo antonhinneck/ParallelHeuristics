@@ -1,4 +1,4 @@
-function solve_TS_MIP_Deco(grb_env, data, Iea::Array{Bool, 1}, Ies::Array{Bool, 1}, optimizer_terminated, mipstart::Array{Bool,1}; heuristic = false, threads = 1, time_limit = 5, uplink = true, outputflag = 0)
+function solve_rotsp(grb_env, data, Iea::Array{Bool, 1}, Ies::Array{Bool, 1}, optimizer_terminated, mipstart::Array{Bool,1}; heuristic = false, threads = 1, time_limit = 5, uplink = true, outputflag = 0)
 
     switchable = Vector{Int64}()
     sreq = nothing

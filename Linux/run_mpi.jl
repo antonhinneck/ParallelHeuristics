@@ -74,7 +74,7 @@ for i in 4:4
         if rank == ROOT
 
                 tr = time()
-                logger = solve_TS_MIP(data, heuristic = HRSTC_ACTIVE, threads = THREADS_ROOT, time_limit = TIMELIMIT)
+                logger = solve_otsp(data, heuristic = HRSTC_ACTIVE, threads = THREADS_ROOT, time_limit = TIMELIMIT)
                 optimizer_terminated = [true]
                 write_log(logger,"log")
                 println("[INFO] RANK ",rank,": WAITING FOR WORKER THREADS TO TERMINATE.")
@@ -204,7 +204,7 @@ for i in 4:4
 
                                 end
 
-                                root_inc, tstat = solve_TS_MIP_Deco(grb_env, data, Iea, Ies, optimizer_terminated, mipstart, threads = THREADS_SLAVE, time_limit = HRSTC_TIMELIMIT, outputflag = 0)
+                                root_inc, tstat = solve_rotsp(grb_env, data, Iea, Ies, optimizer_terminated, mipstart, threads = THREADS_SLAVE, time_limit = HRSTC_TIMELIMIT, outputflag = 0)
 
                                 # message, status = MPI.recv(ROOT, MSG_ROOT_INC, cw)
                                 if root_inc != nothing
