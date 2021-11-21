@@ -41,5 +41,4 @@ push!(start_dict, :v => value.(m[:v]).data)
 logger, m = solve_otsp(data, start = true, heuristic = false, threads = 8, time_limit = 10, logger_active = false, start_dict = start_dict)
 # write_log(logger,string("logs/",data.name,"_log_s"))
 
-
 GRBUjumpconstrbyoptindex(m, 2000)

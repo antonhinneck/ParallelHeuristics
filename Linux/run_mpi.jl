@@ -55,16 +55,6 @@ grb_env = Gurobi.Env()
 # PowerGrids.select_csv_case(4)
 # data = PowerGrids.loadCase()
 
-# Iea = [true for i in 1:length(data.lines)]
-# Ies = [false for i in 1:length(data.lines)]
-# for i in 1:40
-#         Ies[i] = true
-# end
-
-# root_inc, tstat = solve_TS_MIP_Deco(grb_env, data, Iea, Ies, false, mipstart, threads = 4, time_limit = TIMELIMIT, outputflag = 1)
-# end
-#21 bad
-#23 broken
 for i in 4:4
 
         t = time()
@@ -187,29 +177,7 @@ for i in 4:4
                         ## Check for new solutions
                         ## Obtain duals
                         ##------------------------
-                        if init && optimizer_terminated[1] != true #&& rank == 1
-
-                                # if !duals_computed
-
-                                #         runtime, status, objective, solution, a1, a2 = solve_TS_LP_Duals(grb_env, data, line_indicators, threads = 4)
-
-                                #         duals = Array{Float64, 1}(undef, length(data.lines))
-                                #         for i in 1:length(data.lines)
-                                #             if line_indicators[i]
-                                #                 duals[i] = a1[i]
-                                #             else
-                                #                 duals[i] = a2[i]
-                                #             end
-                                #         end
-
-                                #         line_idxs = deepcopy(data.lines)
-                                #         line_idxs = sortperm(duals) #1354
-                                #         #line_idxs = sortperm(duals, by=abs, rev = false)
-                                #         duals_computed = false
-                                # end
-
-                                # # plist = get_priority_list(line_idxs, 1, 200) #1354
-                                # plist = get_priority_list(line_idxs, start_plist, start_plist + len_plist)
+                        if init && optimizer_terminated[1] != true
 
                                 m_opf = build_stdcopf(grb_env, data, threads = THREADS_SLAVE)
                                 optimize!(m_opf)
@@ -260,22 +228,6 @@ for i in 4:4
                                         optimizer_terminated = [true]
                                         break
                                 end
-
-                                # if (start_plist + len_plist) <= length(data.lines)
-                                #         start_plist = len_plist
-                                # end
-                                #=
-                                if status == TerminationStatusCode(1) || has_values
-                                        for j in 1:length(solutions)
-                                                if length(solutions[j]) != 1
-                                                        push!(solution_sent, false)
-                                                        push!(solutions_stack, solutions[j])
-                                                        push!(objective_stack, objectives[j])
-                                                        push!(time_stack, time)
-                                                end
-                                        end
-                                        transmit_solution()
-                                end=#
                         end
                 end
 
