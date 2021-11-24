@@ -3,14 +3,14 @@ using CSV, DataFrames
 
 cd(@__DIR__)
 
-# logname_p = "pglib_opf_case2746wop_k_log_p"
-# logname_s = "pglib_opf_case2746wop_k_log_s"
-# logname_ns = "pglib_opf_case2746wop_k_log_ns"
-# ns = true
-# case3012 = false
-# case6470 = false
-# case3120 = false
-# u = 1.9
+logname_p = "pglib_opf_case2746wop_k_log_p"
+logname_s = "pglib_opf_case2746wop_k_log_s"
+logname_ns = "pglib_opf_case2746wop_k_log_ns"
+ns = true
+case3012 = false
+case6470 = false
+case3120 = false
+u = 1.9
 #legend(loc = "upper left",fancybox=false,edgecolor="black", ncol = 2)
 
 # logname_p = "pglib_opf_case2736sp_k_log_p"
@@ -67,14 +67,14 @@ cd(@__DIR__)
 # case6470 = true
 # u = 18.9
 
-logname_p = "pglib_opf_case13659_pegase_log_p"
-logname_s = "pglib_opf_case13659_pegase_log_s"
-logname_ns = "pglib_opf_case13659_pegase_log_ns"
-ns = false
-case3012 = false
-case3120 = false
-case6470 = false
-u = 1.9
+# logname_p = "pglib_opf_case13659_pegase_log_p"
+# logname_s = "pglib_opf_case13659_pegase_log_s"
+# logname_ns = "pglib_opf_case13659_pegase_log_ns"
+# ns = false
+# case3012 = false
+# case3120 = false
+# case6470 = false
+# u = 1.9
 
 hrstc = false
 
