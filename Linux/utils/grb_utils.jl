@@ -23,7 +23,8 @@ function _gurobi_callback_wrapper(
     cb_where::Cint,
     p_user_data::Ptr{Cvoid}
 )
-    user_data = unsafe_pointer_to_objref(p_user_data) #::_CallbackUserData
+    user_data = unsafe_pointer_to_objref(p_user_data)#::_CallbackUserData
+    #Base.cconvert(_CallbackUserData, user_data)
     try
         user_data.callback(
             CallbackData(user_data.model, cb_data, cb_where),

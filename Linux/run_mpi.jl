@@ -45,21 +45,18 @@ const TIMELIMIT = 900
 const HRSTC_TIMELIMIT = 900
 const HRSTC_ACTIVE = true
 
-const THETAMAX = 0.6
-const THETAMIN = -0.6
+const THETAMAX = 1.2
+const THETAMIN = -1.2
 
 cd(@__DIR__)
 grb_env = Gurobi.Env()
 
-# PowerGrids.set_csv_path("/home/antonhinneck/projects/github/pglib2csv/pglib/2020-08-21.19-54-30-275/csv")
-# PowerGrids.select_csv_case(4)
-# data = PowerGrids.loadCase()
+PowerGrids.set_csv_path("/home/antonhinneck/projects/github/pglib2csv/pglib/2020-08-21.19-54-30-275/csv")
 
-for i in 4:4
+#[, 34, 35, 50, 54, 5] 30 35 50
+for i in 27:27
 
         t = time()
-        PowerGrids.set_csv_path("/home/antonhinneck/projects/github/pglib2csv/pglib/2020-08-21.19-54-30-275/csv")
-        PowerGrids.csv_cases(verbose = false)
         PowerGrids.select_csv_case(i) # 30as bus
         data = PowerGrids.loadCase()
         println(string("Load case data", time() - t))
@@ -74,9 +71,9 @@ for i in 4:4
         if rank == ROOT
 
                 tr = time()
-                logger = solve_otsp(data, heuristic = HRSTC_ACTIVE, threads = THREADS_ROOT, time_limit = TIMELIMIT)
+                logger, model = solve_otsp(data, heuristic = HRSTC_ACTIVE, threads = THREADS_ROOT, time_limit = TIMELIMIT)
                 optimizer_terminated = [true]
-                write_log(logger,"log")
+                write_log(logger,string("logs/",data.name,"_log_p"))
                 println("[INFO] RANK ",rank,": WAITING FOR WORKER THREADS TO TERMINATE.")
                 sreq = MPI.isend(optimizer_terminated, HRSTC, MSG_TERMINATE, cw)
                 MPI.Wait!(sreq)
@@ -132,12 +129,15 @@ for i in 4:4
                 idxs = Vector{Int64}()
                 Iea = [true for i in 1:length(data.lines)]
                 Ies = [false for i in 1:length(data.lines)]
-                mipstart = [true for i in 1:length(data.lines)]
-                n = 160
-                Δn = 20
+                #mipstart = [true for i in 1:length(data.lines)]
+                n = 40
+                Δn = 10
                 sc_vals = zeros(length(data.lines))
                 dp = deepcopy(data.lines)
                 switching_criterion = PowerGrids.get_sensitivities_lpsc
+                root_inc = Array{Float64, 1}(undef, length(data.lines) + 1)
+                root_inc[2:(length(data.lines) + 1)] = ones(length(data.lines))
+                root_inc[1] = Inf64
 
                 while (optimizer_terminated[1] == false && HRSTC_ACTIVE)
                         ## Initialization
@@ -179,7 +179,7 @@ for i in 4:4
                         ##------------------------
                         if init && optimizer_terminated[1] != true
 
-                                m_opf = build_stdcopf(grb_env, data, threads = THREADS_SLAVE)
+                                m_opf = build_stdcopf(grb_env, data, Iea = Iea, threads = THREADS_SLAVE)
                                 optimize!(m_opf)
                                 ct = Ref{Cdouble}()
                                 status = termination_status(m_opf)
@@ -204,13 +204,14 @@ for i in 4:4
 
                                 end
 
-                                root_inc, tstat = solve_rotsp(grb_env, data, Iea, Ies, optimizer_terminated, mipstart, threads = THREADS_SLAVE, time_limit = HRSTC_TIMELIMIT, outputflag = 0)
+                                # for i in data.lines
+                                #         @assert root_inc[i + 1] == Float64(Iea[i])
+                                # end
+                                
+                                root_inc, tstat = solve_rotsp(grb_env, data, Iea, Ies, optimizer_terminated, root_inc, threads = THREADS_SLAVE, time_limit = HRSTC_TIMELIMIT, outputflag = 1, mipgap = 10e-5)
 
                                 # message, status = MPI.recv(ROOT, MSG_ROOT_INC, cw)
-                                if root_inc != nothing
-                                        line_indicators = [Bool.(Int64.(round.(root_inc[2])))...]
-                                        mipstart = [Bool.(Int64.(round.(root_inc[2])))...]
-                                end
+                                Iea = [Bool.(Int64.(round.(root_inc[2:(length(data.lines) + 1)])))...]
 
                                 if tstat == TerminationStatusCode(1)
                                         if n + Δn < length(data.lines)
@@ -228,15 +229,16 @@ for i in 4:4
                                         optimizer_terminated = [true]
                                         break
                                 end
+                                println("Rank 1: Next iteration.")
                         end
-                end
 
-                push!(full_iterations, time() - th)
-                th = time()
+                        push!(full_iterations, time() - th)
+                        th = time()
+                end
         end
 
         if rank == HRSTC
-                open("1354_iterations.txt", "w") do io
+                open(string("logs/",data.name,"_iterations.txt"), "w") do io
                         write(io, "time\n")
                         for fi in full_iterations
                                 write(io, string(fi, "\n"))

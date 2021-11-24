@@ -12,6 +12,20 @@ function expand(arr::Array{Float64, 1}, idctr::Array{Bool, 1})
     return output
 end
 
+function expand(arr::Dict{Tuple{Int64}, Float64}, idctr::Array{Bool, 1})
+    output = Vector{Float64}()
+    ctr = 1
+    for i in 1:length(idctr)
+        if idctr[ctr]
+            push!(output, arr[(ctr,)])
+            ctr += 1
+        else
+            push!(output, 0.0)
+        end
+    end
+    return output
+end
+
 function convertArray(type::Type, array::T where T <: Array{Bool, 1})
 
     out = Vector{type}()

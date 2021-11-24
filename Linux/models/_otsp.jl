@@ -1,4 +1,4 @@
-function solve_otsp(data; heuristic = false, threads = 4, time_limit = 20, start = false, outputflag = 1, logger_active = false, start_dict = nothing)
+function solve_otsp(data; heuristic = false, threads = 4, time_limit = 20, start = false, outputflag = 1, logger_active = false)
 
     time_probed = false
 
@@ -20,7 +20,7 @@ function solve_otsp(data; heuristic = false, threads = 4, time_limit = 20, start
         out = Dict{Int64, Float64}()
         for i in 1:length(data.lines)
             l = data.lines[i]
-            push!(out, l => 4.0 * (data.base_mva / data.line_x[l]) * abs(THETAMAX - THETAMIN))
+            push!(out, l => 2.0 * (data.base_mva / data.line_x[l]) * abs(THETAMAX - THETAMIN) + 1.0)
         end
         return out
     end
@@ -28,7 +28,7 @@ function solve_otsp(data; heuristic = false, threads = 4, time_limit = 20, start
     M = restrictiveM()
 
     # TS = Model(with_optimizer(Gurobi.Optimizer, env_ts, TimeLimit = 3600, Thr eads = threads,  OutputFlag = 1))
-    m = Model(optimizer_with_attributes(() -> Gurobi.Optimizer(env_ts), "Presolve" => 0, "Heuristics" => 0.1, "TimeLimit" => time_limit, "Threads" => threads,  "OutputFlag" => outputflag, "PreDepRow" => 0))
+    m = Model(optimizer_with_attributes(() -> Gurobi.Optimizer(env_ts), "Heuristics" => 0.1, "TimeLimit" => time_limit, "Threads" => threads,  "OutputFlag" => outputflag))
 
     @variable(m, p[data.generators] >= 0)
     @variable(m, v[data.buses])
@@ -40,28 +40,28 @@ function solve_otsp(data; heuristic = false, threads = 4, time_limit = 20, start
 
     # Current law
     @constraint(m, nb[n = data.buses],
-    sum(p[g] for g in data.generators_at_bus[n]) + sum(f[l] for l in data.lines_start_at_bus[n] if l in Set(data.lines)) - sum(f[l] for l in data.lines_end_at_bus[n] if l in Set(data.lines)) == data.bus_Pd[n])
+    sum(p[g] for g in data.generators_at_bus[n]) + sum(f[l] for l in data.lines_start_at_bus[n]) - sum(f[l] for l in data.lines_end_at_bus[n]) == data.bus_Pd[n])
 
     # Voltage law
     @constraint(m, voltage_1[l = data.lines],
     (data.base_mva / data.line_x[l]) * (v[data.bus_id[data.line_start[l]]] - v[data.bus_id[data.line_end[l]]]) + (1 - z[l]) * M[l] >= f[l])
+    
     @constraint(m, voltage_2[l = data.lines],
     (data.base_mva / data.line_x[l]) * (v[data.bus_id[data.line_start[l]]] - v[data.bus_id[data.line_end[l]]]) <= f[l] + (1 - z[l]) * M[l])
 
     # Capacity constraint
     @constraint(m, production_capacity1[g = data.generators], p[g] <= data.generator_Pmax[g])
-    @constraint(m, production_capacity2[g = data.generators], p[g] >= data.generator_Pmin[g])
+    #@constraint(m, production_capacity2[g = data.generators], p[g] >= 0)#data.generator_Pmin[g])
 
     # Angle limits
     @constraint(m, theta_limit1[n = data.buses], v[n] <= THETAMAX)
     @constraint(m, theta_limit2[n = data.buses], v[n] >= THETAMIN)
 
     # Line limit
-    @constraint(m, fl1[l in data.lines], f[l] <= data.line_capacity[l]  * z[l])
+    @constraint(m, fl1[l in data.lines], f[l] <=  data.line_capacity[l] * z[l])
     @constraint(m, fl2[l in data.lines], f[l] >= -data.line_capacity[l] * z[l])
 
-    @constraint(m, slack, v[1] == 0.0)
-    JuMP.fix(v[1], 0.0, force = true)
+    # JuMP.fix(v[1], 0.0, force = true)
 
     @inline function get_switching_status!(switching_status, solution)
         for i in 1:length(data.lines)
@@ -174,10 +174,11 @@ function solve_otsp(data; heuristic = false, threads = 4, time_limit = 20, start
                 Gurobi.GRBcbget(cb_data, cb_where, GRB_CB_MIPSOL_OBJBST, cobj)
                 cbnd = Ref{Cdouble}()
                 Gurobi.GRBcbget(cb_data, cb_where, GRB_CB_MIPSOL_OBJBND, cbnd)
-
-                if typeof(cinc) == Array{Float64, 1} && typeof(cobj) == Float64
+                
+                if typeof(cinc) == Array{Float64, 1} && typeof(cobj[]) == Float64
                     for hrstc_rank in 1:(size - 1)
-                        MPI.isend([cobj, cinc...], hrstc_rank, MSG_INCUMBENT, cw)
+                        MPI.isend([cobj[], cinc[(switched_idx[1]):(switched_idx[2])]...], hrstc_rank, MSG_ROOT_INC, cw)
+                        #println(cinc[(switched_idx[1] - 3):(switched_idx[2] + 3)])
                     end
                 end
             end
@@ -269,9 +270,6 @@ function solve_otsp(data; heuristic = false, threads = 4, time_limit = 20, start
 
     generation_idx = [m.moi_backend.model_to_optimizer_map[index(p[1])].value,
                       m.moi_backend.model_to_optimizer_map[index(p[length(data.generators)])].value]
-    # for g in data.generators
-    #     print(string(m.moi_backend.model_to_optimizer_map[index(p[g])].value," "))
-    # end
     theta_idx = [m.moi_backend.model_to_optimizer_map[index(v[1])].value,
                  m.moi_backend.model_to_optimizer_map[index(v[length(data.buses)])].value]
     power_flow_idx = [m.moi_backend.model_to_optimizer_map[index(f[1])].value,
@@ -285,8 +283,7 @@ function solve_otsp(data; heuristic = false, threads = 4, time_limit = 20, start
     println("power_flow:", power_flow_idx)
     println("switched:  ", switched_idx)
 
-    if start && start_dict != nothing
-
+    if start
         for i in 1:length(data.lines)
             grb_idx = m.moi_backend.model_to_optimizer_map[index(z[i])].value
             Gurobi.GRBsetdblattrelement(grb_model, "Start", grb_idx, Cdouble(1.0))
@@ -310,5 +307,5 @@ function solve_otsp(data; heuristic = false, threads = 4, time_limit = 20, start
     #             value.(f).data...,
     #             value.(z).data...]
 
-    return logger, m
+    return logger, m#, value.(m[:z]).data
 end
