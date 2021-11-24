@@ -8,6 +8,8 @@ function solve_otsp(data; heuristic = false, threads = 4, time_limit = 20, start
     cr = 0
     crt = 0.0
 
+    csrc = 1
+
     ts = 0.0
 
     sreq = nothing
@@ -190,7 +192,6 @@ function solve_otsp(data; heuristic = false, threads = 4, time_limit = 20, start
             rcv = true
             status = false
             message = nothing
-            csrc = 1
             cr += 1
             t = Base.time()
             available, stats = MPI.Iprobe(csrc, MSG_SOLUTIONS, cw)
@@ -236,6 +237,11 @@ function solve_otsp(data; heuristic = false, threads = 4, time_limit = 20, start
                     recent_update = true
                     status, message = MPI.irecv(csrc, MSG_SOLUTIONS, cw)
                 end
+            end
+            if csrc >= (size - 1)
+                csrc = 1
+            else
+                csrc += 1
             end
         end
     end

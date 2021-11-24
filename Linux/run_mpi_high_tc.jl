@@ -38,8 +38,13 @@ const MSG_TERMINATE = 11
 const MSG_SOLUTIONS = 12
 const MSG_ROOT_INC = 13
 
-const THREADS_ROOT = 4
-const THREADS_SLAVE = 8 - THREADS_ROOT
+if size == 3
+        const THREADS_ROOT = 4
+        const THREADS_SLAVE = 2
+else
+        const THREADS_ROOT = 2
+        const THREADS_SLAVE = 2
+end
 
 const TIMELIMIT = 900
 const HRSTC_TIMELIMIT = 900
@@ -50,11 +55,12 @@ const THETAMIN = -1.2
 
 cd(@__DIR__)
 grb_env = Gurobi.Env()
+nbhs = [40,120,200]
 
 PowerGrids.set_csv_path("/home/antonhinneck/projects/github/pglib2csv/pglib/2020-08-21.19-54-30-275/csv")
 
 #[, 34, 35, 50, 54, 5] 30 35 50
-for i in 27:27
+for i in 4:4
 
         t = time()
         PowerGrids.select_csv_case(i) # 30as bus
@@ -73,12 +79,14 @@ for i in 27:27
                 tr = time()
                 logger, model = solve_otsp(data, heuristic = HRSTC_ACTIVE, threads = THREADS_ROOT, time_limit = TIMELIMIT)
                 optimizer_terminated = [true]
-                write_log(logger,string("logs/",data.name,"_log_p"))
+                write_log(logger,string("logs_high_tc/",data.name,"_tc",size,"_log_p"))
                 println("[INFO] RANK ",rank,": WAITING FOR WORKER THREADS TO TERMINATE.")
-                sreq = MPI.isend(optimizer_terminated, HRSTC, MSG_TERMINATE, cw)
-                MPI.Wait!(sreq)
+                for i in 1:(size - 1)
+                        sreq = MPI.isend(optimizer_terminated, HRSTC, MSG_TERMINATE, cw)
+                        MPI.Wait!(sreq)
+                end
 
-        elseif rank == HRSTC
+        elseif rank != ROOT
         # AUXILLIARY HERISTIC
         #--------------------
 
@@ -130,7 +138,7 @@ for i in 27:27
                 Iea = [true for i in 1:length(data.lines)]
                 Ies = [false for i in 1:length(data.lines)]
                 #mipstart = [true for i in 1:length(data.lines)]
-                n = 40
+                n = nbhs[rank]
                 Δn = 10
                 sc_vals = zeros(length(data.lines))
                 dp = deepcopy(data.lines)
