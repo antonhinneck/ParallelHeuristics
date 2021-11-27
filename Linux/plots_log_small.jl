@@ -3,14 +3,14 @@ using CSV, DataFrames
 
 cd(@__DIR__)
 
-logname_p = "pglib_opf_case2746wop_k_log_p"
-logname_s = "pglib_opf_case2746wop_k_log_s"
-logname_ns = "pglib_opf_case2746wop_k_log_ns"
-ns = true
-case3012 = false
-case6470 = false
-case3120 = false
-u = 1.9
+# logname_p = "pglib_opf_case2746wop_k_log_p"
+# logname_s = "pglib_opf_case2746wop_k_log_s"
+# logname_ns = "pglib_opf_case2746wop_k_log_ns"
+# ns = true
+# case3012 = false
+# case6470 = false
+# case3120 = false
+# u = 1.9
 #legend(loc = "upper left",fancybox=false,edgecolor="black", ncol = 2)
 
 # logname_p = "pglib_opf_case2736sp_k_log_p"
@@ -67,14 +67,14 @@ u = 1.9
 # case6470 = true
 # u = 18.9
 
-# logname_p = "pglib_opf_case13659_pegase_log_p"
-# logname_s = "pglib_opf_case13659_pegase_log_s"
-# logname_ns = "pglib_opf_case13659_pegase_log_ns"
-# ns = false
-# case3012 = false
-# case3120 = false
-# case6470 = false
-# u = 1.9
+logname_p = "pglib_opf_case13659_pegase_log_p"
+logname_s = "pglib_opf_case13659_pegase_log_s"
+logname_ns = "pglib_opf_case13659_pegase_log_ns"
+ns = false
+case3012 = false
+case3120 = false
+case6470 = false
+u = 1.9
 
 hrstc = false
 
@@ -94,7 +94,7 @@ println(string("p: ", 100 * (s_p/lbs - 1)," ",100 * (s_init-s_p)/s_init))
 
 
 fig = figure(figsize=(5, 1.5))
-rc("font",family="serif",style="italic")
+rc("font",family="serif",style="italic", size = 10)
 rc("mathtext",fontset="dejavuserif")
 rc("lines",linewidth=1)
 
@@ -117,7 +117,7 @@ ylim(bottom=-0.4,top=u)
 ylabel("gap \$[\\%]\$")
 
 plot(data[:time],(data[:ub] ./ lbs .- 1) * 100,color="gray",linestyle="dotted",mfc = "darkblue",ms = 4.0,marker="s",mew=0.0,label="P-OTSP")
-plot(data2[:time],(data2[:ub] ./ lbs .- 1) * 100,color="gray",linestyle="dotted",mfc = "orange",ms = 4.0,marker="s",mew=0.0,label="OTSP, \$x_0\$")
+plot(data2[:time],(data2[:ub] ./ lbs .- 1) * 100,color="gray",linestyle="dotted",mfc = "orange",ms = 4.0,marker="s",mew=0.0,label="OTSP\$_{\\boldsymbol{x0}}\$")
 if ns
         plot(data3[:time],(data3[:ub] ./ lbs .- 1) * 100,color="gray",linestyle="dotted",mfc = "green",ms = 4.0,marker="s",mew=0.0,label="OTSP")
 end

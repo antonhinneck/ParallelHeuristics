@@ -57,7 +57,7 @@ for i in data4[:time]
         init = false
 end
 
-plot(data2[:time],(data2[:ub] ./ lbs .- 1) * 100,color="gray",linestyle="dotted",mfc = "red",ms = 4.0,marker="s",mew=0.0,label="OTSP, \$x_0\$")
+plot(data2[:time],(data2[:ub] ./ lbs .- 1) * 100,color="gray",linestyle="dotted",mfc = "red",ms = 4.0,marker="s",mew=0.0,label="OTSP\$_{\\boldsymbol{x0}}\$")
 plot(data3[:time],(data3[:ub] ./ lbs .- 1) * 100,color="gray",linestyle="dotted",mfc = "orange",ms = 4.0,marker="s",mew=0.0,label="OTSP")
 
 plot(data[:time],(data[:ub] ./ lbs .- 1) * 100,color="black",linestyle="dotted",label="P-OTSP")
