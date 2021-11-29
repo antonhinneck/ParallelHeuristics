@@ -33,7 +33,6 @@ rc("lines",linewidth=1)
 
 ax = fig.add_axes([0.12,0.19,0.87,0.78])
 
-
 ax.tick_params(direction="in",top=true,right=true,width=1.4)
 grid(color="lightgray",linewidth=1.0, ls = "dashed")
 xlabel("Time \$[s]\$")
