@@ -57,7 +57,9 @@
 
 using PyPlot, CSV, DataFrames
 
-logname = data.name
+# logname = data.name
+logname = "pglib_opf_case1354_pegase"
+cd(@__DIR__)
 
 data11 =  CSV.read(string("logs_sensitivity/",logname,"_40_lpsc",".txt"), DataFrame)
 data12 =  CSV.read(string("logs_sensitivity/",logname,"_80_lpsc",".txt"), DataFrame)
@@ -86,6 +88,8 @@ data45 =  CSV.read(string("logs_sensitivity/",logname,"_200_pwsc",".txt"), DataF
 lbs = 1.1010030841758288e6
 
 fig = figure(figsize=(4, 4))
+rc("text", usetex = true)
+rc("text.latex", preamble = "\\usepackage{amsmath}\\usepackage{calrsfs}")
 rc("font",family="serif",style="italic",size=15.8)
 rc("mathtext",fontset="dejavuserif")
 rc("lines",linewidth=1)
@@ -114,6 +118,8 @@ legend(loc = "upper right",fancybox=false,edgecolor="black", ncol = 2)
 savefig(string("plots/","sensitivity1",".pdf"), format = :pdf)
 
 fig = figure(figsize=(4, 4))
+rc("text", usetex = true)
+rc("text.latex", preamble = "\\usepackage{amsmath}\\usepackage{calrsfs}")
 rc("font",family="serif",style="italic",size=15.8)
 rc("mathtext",fontset="dejavuserif")
 rc("lines",linewidth=1)
@@ -142,6 +148,8 @@ legend(loc = "upper right",fancybox=false,edgecolor="black", ncol = 2)
 savefig(string("plots/","sensitivity2",".pdf"), format = :pdf)
 
 fig = figure(figsize=(4, 4))
+rc("text", usetex = true)
+rc("text.latex", preamble = "\\usepackage{amsmath}\\usepackage{calrsfs}")
 rc("font",family="serif",style="italic",size=15.8)
 rc("mathtext",fontset="dejavuserif")
 rc("lines",linewidth=1)
@@ -170,6 +178,8 @@ legend(loc = "upper right",fancybox=false,edgecolor="black", ncol = 2)
 savefig(string("plots/","sensitivity3",".pdf"), format = :pdf)
 
 fig = figure(figsize=(4, 4))
+rc("text", usetex = true)
+rc("text.latex", preamble = "\\usepackage{amsmath}\\usepackage{calrsfs}")
 rc("font",family="serif",style="italic",size=15.8)
 rc("mathtext",fontset="dejavuserif")
 rc("lines",linewidth=1)
@@ -196,3 +206,38 @@ plot(data45[:time],(data45[:ub] ./ lbs .- 1) * 100,lw = 1.8,linestyle="solid",mf
 
 legend(loc = "upper right",fancybox=false,edgecolor="black", ncol = 2)
 savefig(string("plots/","sensitivity4",".pdf"), format = :pdf)
+
+
+###############################################
+## ANNOTATED
+###############################################
+
+# fig = figure(figsize=(6, 2.4))
+# rc("font",family="serif",style="italic",size=15.8)
+# rc("mathtext",fontset="dejavuserif")
+# rc("lines",linewidth=1)
+# rc("text", usetex = true)
+# rc("text.latex", preamble = "\\usepackage{amsmath}\\usepackage{calrsfs}")
+
+# ax = fig.add_axes([0.08,0.22,0.91,0.77])
+# ax.tick_params(direction="in",top=true,right=true,width=1.4)
+
+# grid(color="lightgray",linewidth=1.0, ls = "dashed")
+# xlabel("Time \$[s]\$")
+# xscale("log")
+
+# for axis in ["top", "bottom", "left", "right"]
+#         ax.spines[axis].set_linewidth(0.0)
+# end
+
+# ylim(bottom=-0.4,top=3.9)
+# ylabel("gap \$[\\%]\$")
+
+# plot(data11[:time],(data11[:ub] ./ lbs .- 1) * 100,lw = 1.8,linestyle="solid",mfc = "skyblue",color="skyblue",ms = 3.0,marker="D",mew=0.0,label="n=40")
+# #plot(data12[:time],(data12[:ub] ./ lbs .- 1) * 100,lw = 1.8,linestyle="solid",mfc = "blue",color="blue",ms = 3.0,marker="D",mew=0.0,label="n=80")
+# plot(data13[:time],(data13[:ub] ./ lbs .- 1) * 100,lw = 1.8,linestyle="solid",mfc = "orange",color="orange",ms = 3.0,marker="D",mew=0.0,label="n=120")
+# #plot(data14[:time],(data14[:ub] ./ lbs .- 1) * 100,lw = 1.8,linestyle="solid",mfc = "lightgreen",color="lightgreen",ms = 3.0,marker="D",mew=0.0,label="n=160")
+# plot(data15[:time],(data15[:ub] ./ lbs .- 1) * 100,lw = 1.8,linestyle="solid",mfc = "lightgreen",color="lightgreen",ms = 3.0,marker="D",mew=0.0,label="n=200")
+
+# legend(loc = "upper right",fancybox=false,edgecolor="black", ncol = 3)
+# savefig(string("plots/","sensitivity1_annotated",".pdf"), format = :pdf)
