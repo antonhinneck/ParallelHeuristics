@@ -52,4 +52,4 @@ plot(data3[:time],(data3[:ub] ./ lbs .- 1) * 100,color="orange",linestyle="dashe
 plot(data4[:time],(data4[:ub] ./ lbs .- 1) * 100,color="red",linestyle="dashed",mfc = "red",ms = 3.0,marker="s",mew=0.0,label="P-OTSP, \$\\lvert\\mathcal{J}\\rvert=3\$")
 
 legend(loc = "lower left",fancybox=false,edgecolor="black", ncol = 1)
-savefig(string("plots/comparison_thread_counts.pdf"), format = :pdf)
+savefig(string("plots_updt/comparison_thread_counts.pdf"), format = :pdf)

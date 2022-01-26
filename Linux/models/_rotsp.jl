@@ -6,7 +6,7 @@ function solve_rotsp(grb_env, data, Iea::Array{Bool, 1}, Ies::Array{Bool, 1}, op
     probing_interval = 10.0
     obj_lower_than_root = 0.0
     nv = length(data.generators) + length(data.buses) + length(data.lines) + sum(Ies)
-    logger = Logger(0, Vector{Float64}(), Vector{Float64}(), Vector{Float64}(), Vector{Float64}())
+    logger = Logger(0, Vector{Float64}(), Vector{Float64}(), Vector{Float64}(), Vector{Float64}(), false)
 
     @inline function restrictiveM()
         out = Dict{Int64, Float64}()

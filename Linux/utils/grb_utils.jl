@@ -44,3 +44,13 @@ grb_callback = @cfunction(
     Cint,
     (Ptr{Cvoid}, Ptr{Cvoid}, Cint, Ptr{Cvoid})
 )
+
+function GRBtimedout(m::JuMP.Model)
+    status = Ref{Cint}()
+    GRBgetintattr(backend(m).optimizer.model, "Status", status)
+    if status[] == 9
+        return true
+    else
+        return false
+    end
+end

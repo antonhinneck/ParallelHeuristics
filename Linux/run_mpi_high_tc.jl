@@ -55,12 +55,12 @@ const THETAMIN = -1.2
 
 cd(@__DIR__)
 grb_env = Gurobi.Env()
-nbhs = [40,120,200]
+nbhs = [20,40,60]
 
 PowerGrids.set_csv_path("/home/antonhinneck/projects/github/pglib2csv/pglib/2020-08-21.19-54-30-275/csv")
 
 #[, 34, 35, 50, 54, 5] 30 35 50
-for i in 4:4
+for i in 5:5
 
         t = time()
         PowerGrids.select_csv_case(i) # 30as bus

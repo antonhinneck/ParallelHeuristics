@@ -22,9 +22,11 @@ const THETAMIN = -1.2
 
 grb_env = Gurobi.Env()
 cases = [30, 34, 35, 50, 54, 5] #27,#4 9 11, 15,21, 23, 27, 30, 40, 57, 50, 5
+cases = [47] #3, 47, 4, 9, 5, 50, 30, 19, 15 34
+# 5, 50, 34, 30, 27, 22, 35
 
 PowerGrids.set_csv_path("/home/antonhinneck/projects/github/pglib2csv/pglib/2020-08-21.19-54-30-275/csv")
-PowerGrids.csv_cases(verbose = true)
+case_names = PowerGrids.csv_cases(verbose = true)
 # PowerGrids.select_csv_case(4) # 30as bus
 # data = PowerGrids.loadCase()
 
@@ -66,82 +68,82 @@ PowerGrids.csv_cases(verbose = true)
 # push!(start_dict, :f => value.(m[:f]).data)
 # push!(start_dict, :v => value.(m[:v]).data)
 
-
-for c in cases
+for c in 22:22
     PowerGrids.select_csv_case(c) # 30as bus
     data = PowerGrids.loadCase()
 
     logger, m = solve_otsp(data, start = true, heuristic = false, threads = 8, time_limit = 900, logger_active = true)
-    write_log(logger,string("logs/",data.name,"_log_s"))
+    GRBtimedout(m) ? timeout(logger) : nothing
+    write_log(logger,string("logs_updt/",data.name,"_log_s"))
 
-    logger, m = solve_otsp(data, start = false, heuristic = false, threads = 8, time_limit = 900, logger_active = true)
-    write_log(logger,string("logs/",data.name,"_log_ns"))
+    # logger, m = solve_otsp(data, start = false, heuristic = false, threads = 8, time_limit = 900, logger_active = true)
+    # write_log(logger,string("logs_updt/",data.name,"_log_ns"))
 end
 
-PowerGrids.select_csv_case(4) # 30as bus
-data = PowerGrids.loadCase()
-logger, m = solve_otsp(data, start = false, heuristic = false, threads = 8, time_limit = 900, logger_active = true)
-write_log(logger,string("logs/",data.name,"_log_ns"))
-
-PowerGrids.set_csv_path("/home/antonhinneck/projects/github/pglib2csv/pglib/2020-08-21.19-54-30-275/csv/sad")
-PowerGrids.csv_cases(verbose = true)
-
-PowerGrids.select_csv_case(4) # 30as bus
-data = PowerGrids.loadCase()
-println(data.name)
-
-# logger = solve_TS_MIP(data, heuristic = false, threads = 8, time_limit = 10, logger_active = true)
+# PowerGrids.select_csv_case(4) # 30as bus
+# data = PowerGrids.loadCase()
+# logger, m = solve_otsp(data, start = false, heuristic = false, threads = 8, time_limit = 900, logger_active = true)
 # write_log(logger,string("logs/",data.name,"_log_ns"))
 
-m = build_stdcopf(grb_env, data, outputflag = 1)
-optimize!(m)
-# objective_value(m)
-# start_dict = Dict{Symbol, Vector{Float64}}()
-# push!(start_dict, :p => value.(m[:p]).data)
-# push!(start_dict, :f => value.(m[:f]).data)
-# push!(start_dict, :v => value.(m[:v]).data)
+# PowerGrids.set_csv_path("/home/antonhinneck/projects/github/pglib2csv/pglib/2020-08-21.19-54-30-275/csv/sad")
+# PowerGrids.csv_cases(verbose = true)
 
-for c in [4]
-    println(data.name)
-    PowerGrids.select_csv_case(c) # 30as bus
-    data = PowerGrids.loadCase()
+# PowerGrids.select_csv_case(4) # 30as bus
+# data = PowerGrids.loadCase()
+# println(data.name)
 
-    logger, m = solve_otsp(data, start = true, heuristic = false, threads = 8, time_limit = 90, logger_active = true)
-    write_log(logger,string("logs/",data.name,"_log_s"))
+# # logger = solve_TS_MIP(data, heuristic = false, threads = 8, time_limit = 10, logger_active = true)
+# # write_log(logger,string("logs/",data.name,"_log_ns"))
 
-    logger, m = solve_otsp(data, start = false, heuristic = false, threads = 8, time_limit = 90, logger_active = false)
-    write_log(logger,string("logs/",data.name,"_log_ns"))
-end
+# m = build_stdcopf(grb_env, data, outputflag = 1)
+# optimize!(m)
+# # objective_value(m)
+# # start_dict = Dict{Symbol, Vector{Float64}}()
+# # push!(start_dict, :p => value.(m[:p]).data)
+# # push!(start_dict, :f => value.(m[:f]).data)
+# # push!(start_dict, :v => value.(m[:v]).data)
+
+# for c in [4]
+#     println(data.name)
+#     PowerGrids.select_csv_case(c) # 30as bus
+#     data = PowerGrids.loadCase()
+
+#     logger, m = solve_otsp(data, start = true, heuristic = false, threads = 8, time_limit = 90, logger_active = true)
+#     write_log(logger,string("logs/",data.name,"_log_s"))
+
+#     logger, m = solve_otsp(data, start = false, heuristic = false, threads = 8, time_limit = 90, logger_active = false)
+#     write_log(logger,string("logs/",data.name,"_log_ns"))
+# end
 
 
-PowerGrids.set_csv_path("/home/antonhinneck/projects/github/pglib2csv/pglib/2020-08-21.19-54-30-275/csv/sad")
-PowerGrids.csv_cases(verbose = true)
+# PowerGrids.set_csv_path("/home/antonhinneck/projects/github/pglib2csv/pglib/2020-08-21.19-54-30-275/csv/sad")
+# PowerGrids.csv_cases(verbose = true)
 
-PowerGrids.select_csv_case(4) # 30as bus
-data = PowerGrids.loadCase()
-println(data.name)
+# PowerGrids.select_csv_case(4) # 30as bus
+# data = PowerGrids.loadCase()
+# println(data.name)
 
-# logger = solve_TS_MIP(data, heuristic = false, threads = 8, time_limit = 10, logger_active = true)
-# write_log(logger,string("logs/",data.name,"_log_ns"))
+# # logger = solve_TS_MIP(data, heuristic = false, threads = 8, time_limit = 10, logger_active = true)
+# # write_log(logger,string("logs/",data.name,"_log_ns"))
 
-m = build_stdcopf(grb_env, data, outputflag = 1)
-optimize!(m)
-# objective_value(m)
-# start_dict = Dict{Symbol, Vector{Float64}}()
-# push!(start_dict, :p => value.(m[:p]).data)
-# push!(start_dict, :f => value.(m[:f]).data)
-# push!(start_dict, :v => value.(m[:v]).data)
+# m = build_stdcopf(grb_env, data, outputflag = 1)
+# optimize!(m)
+# # objective_value(m)
+# # start_dict = Dict{Symbol, Vector{Float64}}()
+# # push!(start_dict, :p => value.(m[:p]).data)
+# # push!(start_dict, :f => value.(m[:f]).data)
+# # push!(start_dict, :v => value.(m[:v]).data)
 
-for c in cases
-    println(data.name)
-    PowerGrids.select_csv_case(c) # 30as bus
-    data = PowerGrids.loadCase()
+# for c in cases
+#     println(data.name)
+#     PowerGrids.select_csv_case(c) # 30as bus
+#     data = PowerGrids.loadCase()
 
-    logger, m = solve_otsp(data, start = true, heuristic = false, threads = 8, time_limit = 100, logger_active = true)
-    write_log(logger,string("logs/",data.name,"_log_s"))
+#     logger, m = solve_otsp(data, start = true, heuristic = false, threads = 8, time_limit = 100, logger_active = true)
+#     write_log(logger,string("logs/",data.name,"_log_s"))
 
-    # logger, m = solve_otsp(data, start = false, heuristic = false, threads = 8, time_limit = 5, logger_active = false)
-    # write_log(logger,string("logs/",data.name,"_log_ns"))
-end
+#     # logger, m = solve_otsp(data, start = false, heuristic = false, threads = 8, time_limit = 5, logger_active = false)
+#     # write_log(logger,string("logs/",data.name,"_log_ns"))
+# end
 
 

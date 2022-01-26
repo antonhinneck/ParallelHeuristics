@@ -69,6 +69,7 @@ mutable struct Logger
     objbnd::Vector{R} where R <: Real
     time::Vector{R} where R <: Real
     src::Vector{R} where R <: Real
+    timedout::Bool
 end
 
 function save(logger::Logger, vals::Array{Float64,1})
@@ -89,6 +90,11 @@ function save(logger::Logger, vals::Array{Float64,1})
     end
 end
 
+function timeout(logger::Logger)
+    logger.timedout = true
+end
+
+
 function write_log(logger::Logger, name::String)
     open(string(name, ".txt"), "w") do f
         write(f, "ub,lb,time,src\n")
@@ -98,6 +104,13 @@ function write_log(logger::Logger, name::String)
             t = logger.time[i]
             src = logger.src[i]
             write(f, string(bo,", ",bb,", ",t,", ",src,"\n"))
+        end
+        if logger.timedout
+            bo = logger.bstobj[logger.counter]
+            bb = logger.objbnd[logger.counter]
+            t = logger.time[logger.counter]
+            src = logger.src[logger.counter]
+            write(f, string(bo,", ",bb,", ",900.0,", ",src,"\n"))
         end
     end
 end

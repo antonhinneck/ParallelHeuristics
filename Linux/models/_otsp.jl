@@ -15,7 +15,7 @@ function solve_otsp(data; heuristic = false, threads = 4, time_limit = 20, start
     sreq = nothing
     send_counter = 0
     env_ts = Gurobi.Env()
-    logger = Logger(0, Vector{Float64}(), Vector{Float64}(), Vector{Float64}(), Vector{Float64}())
+    logger = Logger(0, Vector{Float64}(), Vector{Float64}(), Vector{Float64}(), Vector{Float64}(), false)
     num_vars = length(data.generators) + length(data.buses) + length(data.lines) + length(data.lines)
 
     @inline function restrictiveM()
@@ -35,7 +35,11 @@ function solve_otsp(data; heuristic = false, threads = 4, time_limit = 20, start
     @variable(m, p[data.generators] >= 0)
     @variable(m, v[data.buses])
     @variable(m, f[data.lines])
-    @variable(m, z[data.lines], Bin)
+    if start
+        @variable(m, z[data.lines], Bin, start = 1)
+    else
+        @variable(m, z[data.lines], Bin)
+    end
 
     # Minimal generation costs
     @objective(m, Min, sum(data.generator_c1[g] * p[g] for g in data.generators))
@@ -289,12 +293,12 @@ function solve_otsp(data; heuristic = false, threads = 4, time_limit = 20, start
     println("power_flow:", power_flow_idx)
     println("switched:  ", switched_idx)
 
-    if start
-        for i in 1:length(data.lines)
-            grb_idx = m.moi_backend.model_to_optimizer_map[index(z[i])].value
-            Gurobi.GRBsetdblattrelement(grb_model, "Start", grb_idx, Cdouble(1.0))
-        end
-    end
+    # if start
+    #     for i in 1:length(data.lines)
+    #         grb_idx = m.moi_backend.model_to_optimizer_map[index(z[i])].value
+    #         Gurobi.GRBsetdblattrelement(grb_model, "Start", grb_idx, Cdouble(1.0))
+    #     end
+    # end
 
     GRBupdatemodel(grb_model)
 

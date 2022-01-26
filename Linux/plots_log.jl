@@ -21,7 +21,7 @@ logname_itrs = "pglib_opf_case1354_pegase_iterations"
 hrstc = false
 
 data = CSV.read(string("logs/",logname_p,".txt"), DataFrame)
-data2 = CSV.read(string("logs/",logname_s,".txt"), DataFrame)
+data2 = CSV.read(string("logs_updt/",logname_s,".txt"), DataFrame)
 data3 = CSV.read(string("logs/",logname_ns,".txt"), DataFrame)
 data4 = CSV.read(string("logs/",logname_itrs,".txt"), DataFrame)
 
@@ -87,4 +87,4 @@ for i in 1:length(data[:lb])
 end
 
 legend(loc = "upper right",fancybox=false,edgecolor="black", ncol = 4)
-savefig(string("plots/",logname_p,".pdf"), format = :pdf)
+savefig(string("plots_updt/",logname_p,".pdf"), format = :pdf)
